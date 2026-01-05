@@ -1,0 +1,30 @@
+[Unit]
+Description=Hospital Assistant Robot Application
+After=network-online.target
+
+[Service]
+# Run the service as the 'pi' user
+User=pi
+Group=pi
+
+# Set the working directory to the project folder
+WorkingDirectory=/home/pi/Desktop/new_main_archietecture
+
+# Load the API key from the .env file
+# Ensure your .env file is in the WorkingDirectory
+EnvironmentFile=/home/pi/Desktop/new_main_archietecture/.env
+
+# The command to start the application
+# This uses the python executable from your virtual environment
+ExecStart=/home/pi/Desktop/new_main_archietecture/.venv/bin/python /home/pi/Desktop/new_main_archietecture/main.py
+
+# Restart the service automatically if it fails
+Restart=on-failure
+RestartSec=5s
+
+# Route stdout and stderr to the system journal
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
